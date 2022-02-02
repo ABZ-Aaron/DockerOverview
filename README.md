@@ -1,5 +1,7 @@
 # Docker Tutorial Notes
 
+I watched a [tutorial](https://www.youtube.com/watch?v=3c-iBn73dDE) from TechWorld with Nana and took some notes. Maybe it'll help some people out :)
+
 ## What is a Container
 
 A way to package applications with all necessary dependencies and configurations. 
@@ -419,6 +421,69 @@ We'd also need our files stored on the development server so we can run:
 docker compose -f <yaml file name> up
 ```
 
-## Docker Volumes
+This is useful, as now anyone can access this development server, run `docker-compose` and test out the application. 
 
+## Docker Volumes
 
+This is for stateful applications. 
+
+Let's say we have a database container, if we stop this container, we will lost all our database changes!
+
+On a host, we have a physical file system. With volumes, we plug or mount this file system into a folder of the virtual filesystem of our Docker container. 
+
+So if something changes on the host file system, it will be seen in the container's file system, and vice versa. 
+
+With `docker run` we'd use the `-v` option to create a volume. There are 3 types of volumes:
+
+**HOST VOLUMES**
+
+```bash
+-v /home/mount/data:/var/lib/mysql/data
+```
+
+Here we decide where on the host file system that reference is made
+
+**ANONYMOUS VOLUMES**
+
+```bash
+-v /var/lib/mysql/data
+```
+
+Here Docker automatically creates a folder on the host system
+
+**NAMED VOLUMES** 
+
+```bash
+-v name:/var/lib/mysql/data
+```
+
+Same as anonymous volumes except we can give a name to the host folder so we can reference the volume by name.
+
+In a production environment we'd probably use the named volumes.
+
+In Docker Compose, things don't change much:
+
+```yaml
+services:
+    mongodb:
+        image: mongo
+        volumes:
+         - db-data:/var/lib/mysql/data
+volumes:
+    db-data:
+        driver: local
+```
+
+Here we list all the volumes we defined at the bottom, and under each service we specify where that volume can be mounted.
+
+This means we can mount the same volume to different containers (this is useful if two containers need to share data)
+
+`local` tells Docker to store the data somewhere locally.
+
+So where are the docker volumes located?
+
+**WINDOWS**: `C:\ProgramData\docker\volumes`
+**LINUX**: `/var/lib/docker/volumes`
+**MAC**: `/var/lib/docker/volumes`
+
+NOTE: On Mac, Docker creates a Linux Virtual Machine and stores all Docker data there! So you won't find `/var/lib/docker/volumes`. 
