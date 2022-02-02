@@ -487,3 +487,11 @@ So where are the docker volumes located?
 **MAC**: `/var/lib/docker/volumes`
 
 NOTE: On Mac, Docker creates a Linux Virtual Machine and stores all Docker data there! So you won't find `/var/lib/docker/volumes`. 
+
+To access this VM, just run:
+
+```bash
+docker run -it --privileged --pid=host justincormack/nsenter1
+```
+
+Congrats! You made it to the end :)
