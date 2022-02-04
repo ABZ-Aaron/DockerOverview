@@ -4,15 +4,9 @@ These are some notes I took from a **TechWorld with Nana** [tutorial](https://ww
 
 ## What is a Container
 
-A way to package applications with all necessary dependencies and configurations. 
+Docker is a software platform which allows us to package applications with all necessary dependencies and configurations. These packages / containers are made up of layers of stacked images. The base image could be something like Linux. On top of that, you'd have an application image, followed by configuration data. 
 
-These are made up of layers of stacked images. 
-
-The base image might be something like Linux, because of it's small size. 
-
-On top of that, you'd have an application image, followed by configuration data. 
-
-We can pull Docker images straight from Docker's online repository. We can do this with PostgreSQL Database.
+We can pull Docker images straight from Docker's online repository. We can do this with PostgreSQL Database by running the following:
 
 ```bash
 docker run -e POSTGRES_HOST_AUTH_METHOD=trust postgres:9.6
