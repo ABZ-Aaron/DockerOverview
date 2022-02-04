@@ -1,6 +1,6 @@
 # Docker Tutorial Notes
 
-I watched a [tutorial](https://www.youtube.com/watch?v=3c-iBn73dDE) from TechWorld with Nana and took some notes. Maybe it'll help some people out :)
+These are some notes I took from a **TechWorld with Nana** [tutorial](https://www.youtube.com/watch?v=3c-iBn73dDE). Maybe it'll help some people out :)
 
 ## What is a Container
 
